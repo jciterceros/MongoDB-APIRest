@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Docker
+docker-compose.override.yml
+*.env
+
+# TypeScript
+*.tsbuildinfo
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Coverage directory used by Jest
+coverage/
+
+# Dependency directories
+jspm_packages/
