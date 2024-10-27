@@ -1,14 +1,14 @@
 version: '3.8'
+
 services:
   api:
-    container_name: node-api
     build: .
+    container_name: node-api
+    restart: always
     ports:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/mydatabase
     depends_on:
       - mongo
     command: npm run dev
@@ -17,31 +17,27 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongo
+    restart: always
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db
+      - ./data:/data/db
     networks:
       - mynetwork
 
-  mongo-express:
-    image: mongo-express:latest
-    container_name: mongo-express
+  mongoexpress:
+    image: mongo-express
     ports:
       - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: password
-      ME_CONFIG_MONGODB_SERVER: mongo
+    environment: 
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017
     depends_on:
       - mongo
+    restart: always
     networks:
       - mynetwork
 
 networks:
   mynetwork:
     driver: bridge
-
-volumes:
-  mongo-data:
